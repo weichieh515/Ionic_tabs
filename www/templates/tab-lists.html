@@ -1,0 +1,48 @@
+
+   <ion-view view-title="Lists">
+     <ion-nav-bar class="bar-balanced">
+    <ion-nav-back-button></ion-nav-back-button>
+
+   <ion-nav-title>Ionic Delete/Option Buttons</ion-nav-title>
+  
+    <ion-nav-buttons side="primary">
+      <button class="button button-icon icon ion-ios-minus-outline"
+        ng-click="data.showReorder = false ; data.showDelete = !data.showDelete"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">
+      <button class="button button-icon icon ion-navicon"
+        ng-click="data.showDelete = false ; data.showReorder = !data.showReorder"></button>
+    </ion-nav-buttons>
+      </ion-nav-bar>
+    <ion-content>
+        
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
+    
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+      
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+    
+        <ion-item ng-repeat="item in items" 
+                  item="item" on-hold="openPopover($event)"
+                  href="#/item/{{item.id}}" class="item-remove-animate">
+          Item {{ item.id }}
+          <ion-delete-button class="ion-minus-circled" 
+                             ng-click="onItemDelete(item)">
+          </ion-delete-button>
+          <ion-option-button class="button-assertive"
+                             ng-click="edit(item)">
+            Edit
+          </ion-option-button>
+          <ion-option-button class="button-calm"
+                             ng-click="share(item)">
+            Share
+          </ion-option-button>
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+        </ion-item>
+    
+      </ion-list>
+    </ion-content>
+</ion-view>
