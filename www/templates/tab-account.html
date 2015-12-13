@@ -1,9 +1,19 @@
 <ion-view view-title="Account">
   <ion-content>
     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
+    <ion-toggle  ng-model="toggle.Modal" ng-change="openModal()">
+        Toggle Modal
     </ion-toggle>
+     <button class="button button-dark" ng-click="showPopup()">
+      show
+    </button>
+    <button class="button button-primary" ng-click="showConfirm()">
+      Confirm
+    </button>
+    <button class="button button-positive" ng-click="showAlert()">
+      Alert
+    </button>
     </ion-list>
+   
   </ion-content>
 </ion-view>

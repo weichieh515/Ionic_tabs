@@ -1,11 +1,11 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding" has-bouncing="true">
-    
-    <ion-refresher
-    pulling-text="Pull to refresh..."
-    on-refresh="doRefresh()">
-    </ion-refresher>
-    <div class="list card" ng-click="action()">
+<ion-nav-buttons side="primary">
+      <button class="button" ng-click="toggleLeft()">
+        Left Button
+      </button>
+</ion-nav-buttons>
+  <ion-content class="padding" has-bouncing="true" on-swipe-right="goBack()" on-swipe-left="goForward()">
+    <div class="list card" on-tap="show()" on-hold="show()">
       <div class="item item-divider">Device Platform</div>
       <div class="item item-body">
         <div>
@@ -13,31 +13,47 @@
         </div>
       </div>
     </div>
+    <ion-checkbox ng-repeat="item in checkboxList"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">
+          {{ item.text }}
+    </ion-checkbox>
+    <ion-checkbox ng-model="emailNotification"
+                  ng-true-value="'Subscribed'"
+                  ng-false-value="'Unubscribed'">
+      Newsletter
+    </ion-checkbox>
     
+    <div class="item item-divider"> 
+      Settings
+    </div>
+    <ion-toggle ng-repeat="item in checkboxList"
+                ng-model="item.checked" 
+                ng-checked="item.checked">
+      {{ item.text }}
+    </ion-toggle>
+    <ion-toggle toggle-class="toggle-assertive"
+              ng-model="emailNotification"
+              ng-true-value="'Subscribed'"
+              ng-false-value="'Unubscribed'">
+    Newsletter
+    </ion-toggle>
     
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
-      </div>
+    <pre ng-bind="checkboxList | json"></pre> 
+    <pre ng-bind="emailNotification | json"></pre> 
+    
+    <div class="item item-divider"> 
+      Clientside, Selected Value: {{ data.clientSide }}
     </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
+    <ion-radio ng-repeat="item in RadioList"
+               ng-value="item.value"
+               ng-model="data.clientSide">
+      {{ item.text }}
+    </ion-radio>
+
+    
   </ion-content>
+<ion-footer-bar align-title="left" keyboard-attach class="bar-assertive">
+   <h1 class="title">Title!</h1>
+ </ion-footer-bar>
 </ion-view>
